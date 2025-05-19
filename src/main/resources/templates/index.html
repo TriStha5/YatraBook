@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - Yatra Book</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1c92d2, #f2fcfe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: #1c92d2;
+        }
+
+        p {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            color: white;
+            background-color: #1c92d2;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #125c91;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #1c92d2;
+            color: #1c92d2;
+        }
+
+        .btn-outline:hover {
+            background-color: #1c92d2;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Yatra Book</h1>
+        <p>Capture, Share, and Relive Your Journeys</p>
+        <div class="buttons">
+            <a th:href="@{/loginPage}" class="btn">Login</a>
+            <a th:href="@{/signUpPage}" class="btn btn-outline">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

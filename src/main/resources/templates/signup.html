@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Yatra Book</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1c92d2, #f2fcfe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1c92d2;
+            margin-bottom: 1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            color: white;
+            background-color: #1c92d2;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #125c91;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #333;
+        }
+
+        a {
+            color: #1c92d2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form th:action="@{/signup}" method="post" onsubmit="return validateForm()">
+            <input type="text" name="name" id="name" placeholder="Full Name">
+            <input type="number" name="age" id="age" placeholder="Age">
+            <textarea name="address" id="address" placeholder="Address"></textarea>
+            <input type="email" name="email" id="email" placeholder="Email">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
+            <div id="errorMsg" class="error"></div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a th:href="@{/loginPage}">Login here</a></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value.trim();
+            const age = document.getElementById("age").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const errorMsg = document.getElementById("errorMsg");
+
+            errorMsg.innerText = "";
+
+            if (name === "") {
+                errorMsg.innerText = "Name is required.";
+                return false;
+            }
+
+            const ageNum = parseInt(age);
+            if (isNaN(ageNum) || ageNum < 1 || ageNum > 120) {
+                errorMsg.innerText = "Please enter a valid age between 1 and 120.";
+                return false;
+            }
+
+            if (address === "") {
+                errorMsg.innerText = "Address is required.";
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMsg.innerText = "Invalid email address.";
+                return false;
+            }
+
+            if (password.length < 6) {
+                errorMsg.innerText = "Password must be at least 6 characters.";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMsg.innerText = "Passwords do not match.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
